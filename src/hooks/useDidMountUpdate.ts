@@ -1,20 +1,20 @@
-import { useEffect, useRef } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useRef } from "react";
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
-const useDidMountUpdate = (func:Function, deps:Array<unknown>) => {
-    const didMount = useRef(false);
-    const didMountStrictMode = useRef(false);
+export const useDidMountUpdate = (
+  callback: VoidFunction | (() => VoidFunction),
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  dependencies: any[],
+  useOnMount = false,
+) => {
+  const mountRef = useRef(useOnMount);
 
-    useEffect(() => {
-        if (didMount.current) {
-            if(didMountStrictMode.current) {
-                func();
-            }
-            else didMountStrictMode.current = true;
-        }
-        else didMount.current = true;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, deps);
-}
+  useEffect(() => {
+    if (!mountRef.current) {
+      mountRef.current = true;
+      return;
+    }
 
-export default useDidMountUpdate;
+    return callback();
+  }, dependencies);
+};

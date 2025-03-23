@@ -1,16 +1,13 @@
-import { useEffect, useRef } from "react"
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useRef } from "react";
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
-const useDidMount = (func: Function, deps?: Array<unknown>) => {
-    const didComponentMount = useRef(false)
+export const useDidMount = (callback: VoidFunction | (() => VoidFunction)) => {
+  const mounted = useRef(false);
 
-    useEffect(() => {
-        if (!didComponentMount.current) {
-            func()
-            didComponentMount.current = true
-        }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, deps)
-}
-
-export default useDidMount;
+  useEffect(() => {
+    if (!mounted.current) {
+      mounted.current = true;
+      return callback();
+    }
+  }, []);
+};
