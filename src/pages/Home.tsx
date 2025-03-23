@@ -3,12 +3,10 @@ import { Profile, profileService } from "../services/ProfileService";
 import LoadingScreen from '@/components/Loading';
 
 export default function Home() {
-
   const { data: profile, isLoading, isError,  } = useQuery<Profile | undefined>({
     queryKey: ["profile", 1],
     queryFn: async () => {
       const response = await profileService.getProfile(1);
-      console.log("Response recebido:", response);
       return response;
     },
   });
@@ -18,7 +16,7 @@ export default function Home() {
       {isLoading ? (
         <LoadingScreen />
       ) : isError ? (
-        <div>Erro ao carregar</div>
+         <div>Erro ao carregar</div>
       ) : (
         <div>
           <h1>{profile?.title}</h1>
