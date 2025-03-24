@@ -1,8 +1,8 @@
-import Home from './pages/Home'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import Home from './pages/Home';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
         <Home />
       </div>
     </QueryClientProvider>
-  )
+  );
 }
 
-export default App
+export default App;

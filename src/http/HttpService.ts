@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { IHttpClient } from './IHttpClient';
 
 export class HttpService implements IHttpClient {
@@ -8,12 +8,11 @@ export class HttpService implements IHttpClient {
     this.client = axios.create({
       baseURL: import.meta.env.VITE_BASE_URL,
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         ...config?.headers,
       },
       ...config,
     });
-
 
     this.client.interceptors.response.use(
       (response) => response,
@@ -22,15 +21,15 @@ export class HttpService implements IHttpClient {
           return Promise.reject(new Error(error.response.data.message));
         }
         return Promise.reject(error);
-      }
+      },
     );
 
     this.client.interceptors.request.use((config) => {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem('token');
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
       }
-      return config
+      return config;
     });
   }
 
@@ -39,12 +38,20 @@ export class HttpService implements IHttpClient {
     return response.data;
   }
 
-  async post<T = unknown, D = Record<string, unknown>>(url: string, data?: D, config?: AxiosRequestConfig): Promise<T> {
+  async post<T = unknown, D = Record<string, unknown>>(
+    url: string,
+    data?: D,
+    config?: AxiosRequestConfig,
+  ): Promise<T> {
     const response: AxiosResponse<T> = await this.client.post(url, data, config);
     return response.data;
   }
 
-  async put<T = unknown, D = Record<string, unknown>>(url: string, data?: D, config?: AxiosRequestConfig): Promise<T> {
+  async put<T = unknown, D = Record<string, unknown>>(
+    url: string,
+    data?: D,
+    config?: AxiosRequestConfig,
+  ): Promise<T> {
     const response: AxiosResponse<T> = await this.client.put(url, data, config);
     return response.data;
   }
@@ -54,7 +61,11 @@ export class HttpService implements IHttpClient {
     return response.data;
   }
 
-  async patch<T = unknown, D = Record<string, unknown>>(url: string, data?: D, config?: AxiosRequestConfig): Promise<T> {
+  async patch<T = unknown, D = Record<string, unknown>>(
+    url: string,
+    data?: D,
+    config?: AxiosRequestConfig,
+  ): Promise<T> {
     const response: AxiosResponse<T> = await this.client.patch(url, data, config);
     return response.data;
   }

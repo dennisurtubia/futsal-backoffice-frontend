@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react';
 
 export const useDidMount = (callback: VoidFunction | (() => VoidFunction)) => {
   const mounted = useRef(false);

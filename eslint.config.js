@@ -8,7 +8,6 @@ import eslintPluginPrettier from 'eslint-plugin-prettier'
 
 export default tseslint.config(
   { ignores: ['dist', 'src/components/ui'] },
-  { ignores: ['dist', 'src/components/ui'] },
   {
     extends: [js.configs.recommended, ...tseslint.configs.recommended, prettier],
     files: ['**/*.{ts,tsx}'],
@@ -26,7 +25,8 @@ export default tseslint.config(
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
       'no-console': 'error',
       'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
-      'prettier/prettier': 'error',
+      'semi': ['error', 'always'],
+      'prettier/prettier': 'warn',
       'max-len': ['warn', { code: 100, tabWidth: 2, ignoreUrls: true }],
     },
   },
