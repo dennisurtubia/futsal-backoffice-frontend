@@ -9,11 +9,7 @@ import eslintPluginPrettier from 'eslint-plugin-prettier'
 export default tseslint.config(
   { ignores: ['dist', 'src/components/ui'] },
   {
-    extends: [
-      js.configs.recommended,
-      ...tseslint.configs.recommended,
-      prettier, 
-    ],
+    extends: [js.configs.recommended, ...tseslint.configs.recommended, prettier],
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
       ecmaVersion: 2020,
@@ -26,13 +22,11 @@ export default tseslint.config(
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
-      'react-refresh/only-export-components': [
-        'warn',
-        { allowConstantExport: true },
-      ],
+      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
       'no-console': 'error',
       'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
-      'prettier/prettier': 'error', 
+      'prettier/prettier': 'error',
+      'max-len': ['warn', { code: 100, tabWidth: 2, ignoreUrls: true }],
     },
   },
 )
